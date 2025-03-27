@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../components/head") -%>
+<body>
+
+    <!-- [ navigation menu ] start -->
+    <%- include("../components/sidebar") -%>
+    <!-- [ navigation menu ] end -->
+
+    <!-- [ Header ] start -->
+    <%- include("../components/header") -%>
+    <!-- [ Header ] end -->
+
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <div class="page-header">
+                                <div class="page-block">
+                                    <div class="row align-items-center justify-content-center">
+                                        <div class="col-lg-8">
+                                            <h4>Active Logs</h4>
+                                            <!-- Table to display logs -->
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr class="text-center">
+                                                        <th>Product</th>
+                                                        <th>User</th>
+                                                        <th>Action Time</th>
+                                                        <th>Additional Data</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% logs.forEach(log => { %>
+                                                        <tr class="text-center">
+                                                            <td class="align-middle"><%= log.additionalData.productName%></td>
+                                                            <td class="align-middle"><%= log.userId.username ? log.userId.username : 'N/A' %></td>
+                                                            <td class="align-middle"><%= new Date(log.actionTime).toLocaleString() ? new Date(log.actionTime).toLocaleString() : 'N/A' %></td>
+                                                            <td class="align-middle"><%= log.additionalData.action ? log.additionalData.action : 'N/A' %></td>
+                                                            <td class="align-middle"><a href="/log/delete/<%= log._id %>" class="btn btn-danger btn-sm m-0">Delete Log</a></td>
+                                                        </tr>
+                                                    <% }) %>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include("../components/footer") -%>
+</body>
+</html>

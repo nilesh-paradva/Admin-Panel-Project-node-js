@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../components/head") -%>
+<body>
+
+    <!-- [ Navigation Menu ] Start -->
+    <%- include("../components/sidebar") -%>
+    <!-- [ Navigation Menu ] End -->
+
+    <!-- [ Header ] Start -->
+    <%- include("../components/header") -%>
+    <!-- [ Header ] End -->
+
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="container mt-4">
+                        <h1 class="text-center mb-4">View Products</h1>
+
+                        <form action="/ViewProduct" method="get" class="d-flex mb-4 align-items-center justify-content-between">
+                                <div class="form-group col-xl-5">
+                                    <label for="search" class="text-black">Type Product Name :-</label>
+                                    <input type="text" name="search" class="form-control py-2" placeholder="Search by name" value="<%= search %>" />
+                                </div>
+                                <div class="form-group col-xl-5">
+                                    <label for="category" class="text-black">Category :-</label>
+                                    <select name="category" class="form-control m-0">
+                                        <option value="" disabled selected>Select a category</option>
+                                        <% const categories = [
+                                            'electronics', 
+                                            'fashion', 
+                                            'home_appliances', 
+                                            'books', 
+                                            'sports', 
+                                            'toys', 
+                                            'beauty_and_personal_care', 
+                                            'automotive', 
+                                            'health_and_wellness', 
+                                            'groceries', 
+                                            'music', 
+                                            'food_and_beverages', 
+                                            'pets', 
+                                            'furniture', 
+                                            'jewelry_and_accessories', 
+                                            'gardening_and_outdoors', 
+                                            'computers_and_laptops', 
+                                            'gaming', 
+                                            'real_estate', 
+                                            'travel_and_tourism', 
+                                            'education_and_learning'
+                                        ]; %>
+                                        
+                                        <option value="">All Categories</option>
+                                        <% categories.forEach(function(category) { %>
+                                            <option value="<%= category %>" <%= category %> >
+                                                <%= category.replace(/_/g, ' ').toUpperCase() %>
+                                            </option>
+                                        <% }); %>
+                                    </select>
+                                </div>
+                             <div class="form-group col-xl-2" style="margin-top: 2.5rem;">
+                                 <button type="submit" class="btn btn-primary ms-2 align-self-end">Search</button>
+                             </div>
+                        </form>
+
+                        <div class="row g-4">
+                            <% products.forEach(product => { %>
+                                <div class="col-md-4 col-lg-4">
+                                    <div class="card-box shadow border border-2 border-secondary rounded-2 h-100 d-flex flex-column">
+                                        <div class="card-box-body px-3 py-3 flex-grow-1 d-flex flex-column">
+                                            <div class="mb-3 product-profile-img-dis d-flex align-items-center justify-content-between flex-column flex-md-row">
+                                                <div class="profile-picture-container d-flex align-items-center">
+                                                    <!-- Display product image -->
+                                                    <img src="<%= product.ProductImage ? product.ProductImage : 'uploads/productImage/Product.png' %>"  class="product-picture border border-1 p-1"  alt="<%= product.name %>"  style="width: 150px; height: 150px; object-fit: cover; border-radius: 8px;">
+                                                    <div class="ps-2">
+                                                        <h4 class="card-title text-primary m-0 text-black"><%= product.name %></h4>
+                                                        <p class="m-0"><%- product.description %>...</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="product-details flex-grow-1 d-flex flex-column">
+                                                <!-- Product title and price -->
+                                                <div class="mb-3">
+                                                    <h5 class="text-success"><%= product.price.toFixed(2) %> ₹</h5>
+                                                    <% if (product.originalPrice > 0) { %>
+                                                        <span class="text-muted"><%= product.originalPrice.toFixed(2) %> ₹</span>
+                                                    <% } %>
+                                                </div>
+                                                
+                                                <!-- Discount information -->
+                                                <% if (product.discountPercentage > 0) { %>
+                                                    <div class="discount-info mb-3">
+                                                        <strong class="text-danger">Discount: <%= product.discountPercentage %>%</strong>
+                                                        <p class="text-muted">Valid till: <%= new Date(product.discountEndDate).toLocaleDateString() %></p>
+                                                    </div>
+                                                <% } %>
+
+                                                <!-- Stock Information -->
+                                                <div class="stock-info mb-2">
+                                                    <p class="m-0"><strong>Stock:</strong> <%= product.isInStock ? "In Stock" : "Out of Stock" %></p>
+                                                    <p class="m-0"><strong>Quantity:</strong> <%= product.stockQuantity %></p>
+                                                </div>
+                                                
+                                                <!-- Rating and reviews -->
+                                                <div class="rating-info">
+                                                    <p><strong>Average Rating:</strong> <%= product.ratings.averageRating %> / 5</p>
+                                                    <p><strong>Total Ratings:</strong> <%= product.ratings.totalRatings %></p>
+                                                </div>
+                                            </div>
+                                            <div class="card-box-footer d-flex align-items-center gap-3">
+                                                <a href="/product/<%= product._id %>" class="btn btn-info btn-block m-0">View</a>
+                                                <a href="/editproduct/<%= product._id %>" class="btn btn-primary btn-block m-0">Edit</a>
+                                                <a href="/product/delete/<%= product._id %>" class="btn btn-danger btn-block m-0">Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% }); %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Required JS -->
+    <%- include("../components/footer") -%>
+</body>
+</html>

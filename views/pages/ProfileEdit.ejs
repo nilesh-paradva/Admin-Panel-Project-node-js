@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" >
+<%- include("../components/head") -%>
+
+<!-- Edit Profile -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content rounded-2" style="overflow: hidden;">
+            <div class="modal-header">
+                <h5 class="modal-title">User Registration</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/user/edit/<%= user._id %>" method="post">
+					<div class="mb-3">
+						<label for="username" class="form-label text-black">Username</label>
+						<input type="text" class="form-control" id="username" name="username" value="<%= user.username %>">
+					</div>
+					<div class="mb-3">
+						<label for="bio" class="form-label text-black">Bio</label>
+						<input type="text" class="form-control" id="bio" name="bio" value="<%= user.bio %>">
+					</div>
+					<div class="mb-3">
+						<label for="email" class="form-label text-black">Email</label>
+						<input type="email" class="form-control" id="email" name="email" value="<%= user.email %>">
+					</div>
+					<div class="mb-3">
+						<label for="phonenumber" class="form-label text-black">Phone Number</label>
+						<input type="tel" class="form-control" id="phonenumber" name="phonenumber" value="<%= user.phonenumber %>">
+					</div>
+					<div class="mb-3">
+						<label for="address" class="form-label text-black">Address</label>
+						<textarea class="form-control" id="address" name="address"><%= user.address %></textarea>
+					</div>
+					<div class="mb-3">
+						<label for="dob" class="form-label text-black">Date of Birth</label>
+						<input type="date" class="form-control" id="dob" name="dob" value="<%= user && user.dob ? user.dob.toISOString().split('T')[0] : '' %>">
+					</div>
+					<div class="mb-3">
+						<label class="form-label text-black">Gender</label>
+						<select class="form-select" id="gender" name="gender">
+							<option value="">Select</option>
+							<option value="Male" <%= user.gender === "Male" ? "selected" : "" %>>Male</option>
+							<option value="Female" <%= user.gender === "Female" ? "selected" : "" %>>Female</option>
+							<option value="Other" <%= user.gender === "Other" ? "selected" : "" %>>Other</option>
+						</select>
+					</div>
+					<div class="mb-3">
+						<label class="form-label text-black">Role</label>
+						<select class="form-select" id="role" name="role">
+							<option value="">Select</option>
+							<option value="Admin" <%= user.role === "admin" ? "selected" : "" %>>Admin</option>
+							<option value="User" <%= user.role === "user" ? "selected" : "" %>>User</option>
+							<option value="Superadmin" <%= user.role === "superadmin" ? "selected" : "" %>>Superadmin</option>
+						</select>
+					</div>
+					<div class="mb-3 d-flex align-items-center justify-content-start gap-3">
+                        <label class="form-label m-0 p-0 text-black">Status :-</label>
+                        <div class="d-flex align-items-center">
+                            <input type="radio" id="active" name="status" value="Active" <%= user.status === "Active" ? "checked" : "" %>>
+                            <label for="active" class="m-0 ps-1">Active</label>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <input type="radio" id="inactive" name="status" value="Inactive" <%= user.status === "Inactive" ? "checked" : "" %>>
+                            <label for="inactive" class="m-0 ps-1">Inactive</label>
+                        </div>
+						<div class="d-flex align-items-center">
+                            <input type="radio" id="banned" name="status" value="banned" <%= user.status === "banned" ? "checked" : "" %>>
+                            <label for="banned" class="m-0 ps-1">Banned</label>
+                        </div>
+                    </div>
+					<div class="mb-3">
+						<label for="language" class="form-label text-black">Language</label>
+						<input type="text" class="form-control" id="language" name="language" value="<%= user.language %>">
+					</div>
+					<div class="mb-3">
+						<label for="postalcode" class="form-label text-black">Postal Code</label>
+						<input type="text" class="form-control" id="postalcode" name="postalcode" value="<%= user.postalcode %>">
+					</div>
+					<div class="mb-3">
+						<label for="city" class="form-label text-black">City</label>
+						<input type="text" class="form-control" id="city" name="city" value="<%= user.city %>">
+					</div>
+					<div class="mb-3">
+						<label for="state" class="form-label text-black">State</label>
+						<input type="text" class="form-control" id="state" name="state" value="<%= user.state %>">
+					</div>
+					<div class="mb-3">
+						<label for="country" class="form-label text-black">Country</label>
+						<input type="text" class="form-control" id="country" name="country" value="<%= user.country %>">
+					</div>
+					<div class="mb-3">
+						<label for="linkedin" class="form-label text-black">Linkedin</label>
+						<input type="text" class="form-control" id="linkedin" name="linkedin" value="<%= user.linkedin %>">
+					</div>
+					<div class="mb-3">
+						<label for="facebook" class="form-label text-black">Facebook</label>
+						<input type="text" class="form-control" id="facebook" name="facebook" value="<%= user.facebook %>">
+					</div>
+					<div class="mb-3">
+						<label for="instagram" class="form-label text-black">Instagram</label>
+						<input type="text" class="form-control" id="instagram" name="instagram" value="<%= user.instagram %>">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary">Update</button>
+					</div>
+				</form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Img Upload -->
+<div class="modal fade" id="imgChange" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content rounded-2" style="overflow: hidden;">
+            <div class="modal-header">
+                <h5 class="modal-title">User Registration</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+				<div class="container">
+					<div class="row">
+						<div class="col-12 w-100">
+							<form action="/user/profileImg/<%= user._id %>" method="post" enctype="multipart/form-data" class="w-100">
+								<div class="img-dis w-full d-flex align-items-center justify-content-between flex-column flex-lg-row">
+									<div class="profile-dis d-flex align-items-center justify-content-center">
+										<div class="profile-picture-container" style="position: relative; display: inline-block;">
+											<img src="<%= user.avatar ? '../' + user.avatar : '/uploads/profileImage/user_avatar.png' %>" class="user-avatar border border-1 p-1" alt="<%= user.username %>" style="width: 120px; height: 120px; object-fit: cover; border-radius: 8px;" id="profilePicPreview">
+										</div>
+										<div class="dis ps-2">
+											<h4 class="mt-3 mb-0"><%= user && user.username ? user.username : "Nilesh" %></h4>
+											<p class="text-muted m-0 fs-6"><%= user && user.email ? user.email : "Enter your Email" %></p>
+											<span class="<%= user.status == 'Active' ? 'text-success fw-bold' : 'text-danger fw-bold' %>"><%= user.status %></span>
+										</div>
+									</div>
+									<div class="delete-upload gap-2 d-flex align-items-center justify-content-center my-3">
+										<div class="img-upload">
+											<label for="imageUpload" class="m-0 btn btn-primary"><i class="fa-solid fa-camera m-0" for="imageUpload"></i></label>
+											<input type="file" id="imageUpload" name="profileImg" style="display: none;">
+										</div>
+										<div class="img-delete">
+											<a href="/profileimage/delete/<%= user._id %>" class="btn btn-danger m-0" ><i class="fa-solid fa-trash m-0"></i></a>
+										</div>
+									</div>									
+									<div class="upload-btn w-full">
+										<button class="btn btn-primary" type="submit">Upload&nbsp;Photo</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Change Password -->
+<div class="modal fade" id="passChange" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content rounded-2" style="overflow: hidden;">
+            <div class="modal-header">
+                <h5 class="modal-title">User Registration</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<form action="/user/passwordChange/<%= user._id %>" method="post" class="d-flex align-items-center justify-content-between flex-column gap-2 w-100">
+								<div class="mb-3">
+									<label for="OldPass" class="form-label text-black">Old Password :- </label>
+									<input type="text" class="form-control" id="OldPass" name="OldPass">
+								</div>
+								<div class="mb-3">
+									<label for="NewPass" class="form-label text-black">New Password :-</label>
+									<input type="password" class="form-control" id="NewPass" name="NewPass">
+								</div>
+								<div class="mb-3">
+									<label for="ConfPass" class="form-label text-black">Confirm Password :-</label>
+									<input type="password" class="form-control" id="ConfPass" name="ConfPass">
+								</div>
+								<div class="upload-btn">
+									<button class="btn btn-primary" type="submit">Change Password</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+	<body class="bg-gray-100 font-sans">
+		<!-- [ navigation menu ] start -->
+		<%- include("../components/sidebar") -%>
+		<!-- [ navigation menu ] end -->
+		<!-- [ Header ] start -->
+		<%- include("../components/header") -%>
+		<!-- [ Header ] end -->
+		<div class="pcoded-main-container">
+			<div class="pcoded-wrapper">
+				<div class="pcoded-content">
+					<div class="pcoded-inner-content">
+						<div class="main-body">
+							<div class="page-wrapper">
+								<div class="page-header">
+									<div class="page-block">
+										<div class="row align-items-center justify-content-center" >
+											<div class="col-md-12 d-flex align-items-center justify-content-between">
+												<div class="page-header-title">
+													<h5 class="m-b-10">Profile Page</h5>
+													<ul class="breadcrumb">
+														<li class="breadcrumb-item"><a href="/" class="text-decoration-none"><i class="feather icon-home"></i></a></li>
+														<li class="breadcrumb-item"><a href="#" class="text-decoration-none">User</a></li>
+														<li class="breadcrumb-item"><a href="#" class="text-decoration-none">Profile</a></li>
+													</ul>
+												</div>
+												<div class="edit-pass">
+													<!-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Change PassWord</button> -->
+													<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit Profile</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row gap-3 align-items-center justify-content-center">
+									<div class="col-lg-10 d-flex align-items-center justify-content-between border flex-column flex-lg-row border-2 py-4 rounded-2  border-primary">
+											<div class="img-dis d-flex align-items-center">
+												<div class="profile-picture-container" style="position: relative; display: inline-block;">
+													<img src="<%= user.avatar ? '../' + user.avatar : '/uploads/profileImage/user_avatar.png' %>" class="user-avatar border border-1 p-1" alt="<%= user.username %>" style="width: 120px; height: 120px; object-fit: cover; border-radius: 8px;" id="profilePicPreview">
+												</div>
+												<div class="dis ps-2">
+													<h4 class="mt-3 mb-0"><%= user && user.username ? user.username : "Nilesh" %></h4>
+													<p class="text-muted m-0 fs-6"><%= user && user.email ? user.email : "Enter your Email" %></p>
+													<span class="<%= user.status == 'Active' ? 'text-success fw-bold' : 'text-danger fw-bold' %>"><%= user.status %></span>
+												</div>
+											</div>
+											<div class="upload-btn d-flex align-items-center justify-content-center flex-column flex-lg-row">
+												<% if(user.status == 'Active'){ %>
+													<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#imgChange" Status><i class="fa-solid fa-pen-to-square m-0 p-0"></i></button>
+													<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#passChange" Status>Change PassWord</button>
+												<% }else{ %>
+													<button class="<%= user.status == 'Active' ? 'btn btn-primary' : 'btn btn-light' %>" data-bs-toggle="tooltip" data-bs-placement="top" title="Go To Edit Profile In status Active"><i class="fa-solid fa-pen-to-square m-0 p-0"></i></button>
+													<button class="<%= user.status == 'Active' ? 'btn btn-primary' : 'btn btn-light' %>" data-bs-toggle="tooltip" data-bs-placement="top" title="Go To Edit Profile In status Active">Change PassWord</button>
+												<% } %>												
+											</div>
+									</div>
+									<div class="col-lg-10 d-flex flex-column  justify-content-start border border-2 py-4 rounded-2  border-primary">
+										<h3>Contact Information</h3>
+										<div class="dis">
+											<ul>
+												<li><p class="text-black fs-6 fw-bold m-0">Username :- </span><span class="<%= user.status == 'Active' ? 'text-success fw-semibold' : 'text-dark-emphasis' %> "><%= user && user.username ? user.username : "Nilesh" %></p></li>
+												<li><p class="text-black fs-6 fw-bold m-0">Email :- </span><span class="<%= user.status == 'Active' ? 'text-success fw-semibold' : 'text-dark-emphasis' %> "><%= user && user.email ? user.email : "johndoe@example.com" %></p></li>
+												<li><p class="text-black fs-6 fw-bold m-0">Phone Number :- </span><span class="<%= user.status == 'Active' ? 'text-success fw-semibold' : 'text-dark-emphasis' %> "><%= user && user.phonenumber ? user.phonenumber : "Phone Number" %></p></li>
+												<li><p class="text-black fs-6 fw-bold m-0">Date Of Birth :- </span><span class="<%= user.status == 'Active' ? 'text-success fw-semibold' : 'text-dark-emphasis' %> "><%= user && user.dob ? user.dob.toLocaleDateString('en-GB').replace(/\//g, '-') : '' %></p></li>
+												<li><p class="text-black fs-6 fw-bold m-0">Gender :- </span><span class="<%= user.status == 'Active' ? 'text-success fw-semibold' : 'text-dark-emphasis' %> "><%= user && user.gender ? user.gender : "Gender"%></p></li>
+												<li><p class="text-black fs-6 fw-bold m-0">language :- </span><span class="<%= user.status == 'Active' ? 'text-success fw-semibold' : 'text-dark-emphasis' %> "><%= user && user.language ? user.language : "Language..."%></p></li>
+											</ul>
+										</div>
+									</div>
+									<div class="col-lg-10 d-flex flex-column  justify-content-start border border-2 py-4 rounded-2  border-primary">
+										<h3>Location</h3>
+										<div class="dis">
+											<ul>
+												<li><p class="text-black fs-6 m-0 fw-bold">City :- <span class="<%= user.status == 'Active' ? 'text-success fw-semibold' : 'text-dark-emphasis' %> "><%= user && user.city ? user.city : "City Add.."%></span></p></li>
+												<li><p class="text-black fs-6 m-0 fw-bold">State :- <span class="<%= user.status == 'Active' ? 'text-success fw-semibold' : 'text-dark-emphasis' %> "><%= user && user.state ? user.state : "State Add.."%></span></p></li>
+												<li><p class="text-black fs-6 m-0 fw-bold">Country :- <span class="<%= user.status == 'Active' ? 'text-success fw-semibold' : 'text-dark-emphasis' %> "><%= user && user.country ? user.country : "Contry Add.."%></span></p></li>
+												<li><p class="text-black fs-6 m-0 fw-bold">Postal Code :- <span class="<%= user.status == 'Active' ? 'text-success fw-semibold' : 'text-dark-emphasis' %> "><%= user && user.postalcode ? user.postalcode : "Postalcode Add.."%></span></p></li>
+												<li><p class="text-black fs-6 m-0 fw-bold">Address :- <span class="<%= user.status == 'Active' ? 'text-success fw-semibold' : 'text-dark-emphasis' %> "><%= user && user.address ? user.address : "Address Add.."%></span></p></li>
+											</ul>
+										</div>
+									</div>								  
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<%- include("../components/footer") -%>
+	</body> 
+</html>

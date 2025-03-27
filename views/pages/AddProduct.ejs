@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../components/head") -%>
+<body>
+
+    <!-- [ navigation menu ] start -->
+	<%- include("../components/sidebar") -%>
+	<!-- [ navigation menu ] end -->
+
+	<!-- [ Header ] start -->
+	<%- include("../components/header") -%>
+	<!-- [ Header ] end -->
+
+    <div class="pcoded-main-container">
+		<div class="pcoded-wrapper">
+			<div class="pcoded-content">
+				<div class="pcoded-inner-content">
+					<div class="main-body">
+						<div class="page-wrapper">
+							<div class="page-header">
+								<div class="page-block">
+									<div class="row align-items-center justify-content-center">
+										<div class="col-md-8">
+                                            <form action="/product/add" method="post" enctype="multipart/form-data">
+                                                <!-- Product Name -->
+                                                <div class="form-group mb-3">
+                                                    <label for="name" class="text-black">Product Name :-</label>
+                                                    <input type="text" class="form-control" id="name" name="name" placeholder="Product Name">
+                                                </div>
+
+                                                <!-- Product Description -->
+                                                <div class="form-group mb-3">
+                                                    <label for="description" class="text-black">Product Description :-</label>
+                                                    <textarea id="description" class="form-control" name="description" placeholder="Product Description"></textarea>
+                                                </div>
+
+                                                <!-- Product Price -->
+                                                <div class="form-group mb-3">
+                                                    <label for="price" class="text-black">Product Price :-</label>
+                                                    <input type="number" class="form-control" id="price" name="price" placeholder="Product Price">
+                                                </div>
+
+                                                <!-- Original Price -->
+                                                <div class="form-group mb-3">
+                                                    <label for="originalPrice" class="text-black">Original Price :-</label>
+                                                    <input type="number" class="form-control" id="originalPrice" name="originalPrice" placeholder="Original Price">
+                                                </div>
+
+                                                <!-- Category -->
+                                                <!-- <div class="form-group mb-3">
+                                                    <label for="category" class="text-black">Category :-</label>
+                                                    <input type="text" class="form-control" id="category" name="category" placeholder="Category">
+                                                </div> -->
+
+                                                <div class="form-group mb-3">
+                                                    <label for="category" class="text-black">Category :-</label>
+                                                    <select class="form-control" id="category" name="category">
+                                                        <option value="" disabled selected>Select a category</option>
+                                                        <% const categories = [
+                                                            'electronics', 
+                                                            'fashion', 
+                                                            'home_appliances', 
+                                                            'books', 
+                                                            'sports', 
+                                                            'toys', 
+                                                            'beauty_and_personal_care', 
+                                                            'automotive', 
+                                                            'health_and_wellness', 
+                                                            'groceries', 
+                                                            'music', 
+                                                            'food_and_beverages', 
+                                                            'pets', 
+                                                            'furniture', 
+                                                            'jewelry_and_accessories', 
+                                                            'gardening_and_outdoors', 
+                                                            'computers_and_laptops', 
+                                                            'gaming', 
+                                                            'real_estate', 
+                                                            'travel_and_tourism', 
+                                                            'education_and_learning'
+                                                        ]; %>
+                                                        <% categories.forEach(function(category) { %>
+                                                            <option value="<%= category %>"><%= category.replace(/_/g, ' ').toUpperCase() %></option>
+                                                        <% }); %>
+                                                    </select>
+                                                </div>
+                                                
+                                                <!-- Sub Category -->
+                                                <!-- <div class="form-group mb-3">
+                                                    <label for="subCategory" class="text-black">Sub Category :-</label>
+                                                    <input type="text" class="form-control" id="subCategory" name="subCategory" placeholder="Sub Category">
+                                                </div> -->
+
+                                                <!-- Stock Quantity -->
+                                                <div class="form-group mb-3">
+                                                    <label for="stockQuantity" class="text-black">Stock Quantity :-</label>
+                                                    <input type="number" class="form-control" id="stockQuantity" name="stockQuantity" placeholder="Stock Quantity" >
+                                                </div>
+
+                                                <!-- Is In Stock -->
+                                                <div class="form-group mb-3">
+                                                    <label for="isInStock" class="text-black">Is In Stock :-</label>
+                                                    <select class="form-control" id="isInStock" name="isInStock">
+                                                        <option value="true">Yes</option>
+                                                        <option value="false">No</option>
+                                                    </select>
+                                                </div>
+
+                                                <!-- Product Image -->
+                                                <div class="form-group mb-3">
+                                                    <label for="ProductImage" class="text-black">Product Image :-</label>
+                                                    <input type="file" class="form-control" id="ProductImage" name="ProductImage" placeholder="Upload Product Image">
+                                                </div>
+
+                                                <!-- Discount Percentage -->
+                                                <div class="form-group mb-3">
+                                                    <label for="discountPercentage" class="text-black">Discount Percentage :-</label>
+                                                    <input type="number" class="form-control" id="discountPercentage" name="discountPercentage" placeholder="Discount Percentage">
+                                                </div>
+
+                                                <!-- Discount Start Date -->
+                                                <div class="form-group mb-3">
+                                                    <label for="discountStartDate" class="text-black">Discount Start Date :-</label>
+                                                    <input type="date" class="form-control" id="discountStartDate" name="discountStartDate">
+                                                </div>
+
+                                                <!-- Discount End Date -->
+                                                <div class="form-group mb-3">
+                                                    <label for="discountEndDate" class="text-black">Discount End Date :-</label>
+                                                    <input type="date" class="form-control" id="discountEndDate" name="discountEndDate">
+                                                </div>
+
+                                                <div class="form-group mb-3 text-center">
+                                                    <input type="submit" class="btn btn-primary" value="Add Product">
+                                                </div>
+                                            </form>
+                                        </div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <script src="https://cdn.tiny.cloud/1/qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc/tinymce/6/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: "#description",
+            plugins: "advlist autolink lists link image charmap preview anchor pagebreak searchreplace wordcount visualblocks code fullscreen insertdatetime media table emoticons",
+            toolbar: "undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | outdent indent | bullist numlist | link image media | table emoticons | code preview fullscreen",
+            menubar: "file edit view insert format tools table help",
+            height: 300
+        });
+    </script>
+    <%- include("../components/footer") -%>
+</body>
+</html>

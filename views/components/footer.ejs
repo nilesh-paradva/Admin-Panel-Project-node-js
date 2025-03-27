@@ -1,0 +1,48 @@
+<script src="../js/vendor-all.min.js"></script>
+<script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="../js/pcoded.min.js"></script>
+<script src="https://unpkg.com/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    // function timeAgo(date) {
+    //     const now = new Date();
+    //     const seconds = Math.floor((now - new Date(date)) / 1000);
+    //     if (seconds < 60) return `${seconds} sec ago`;
+    //     const minutes = Math.floor(seconds / 60);
+    //     if (minutes < 60) return `${minutes} min ago`;
+    //     const hours = Math.floor(minutes / 60);
+    //     if (hours < 24) return `${hours} hours ago`;
+    //     const days = Math.floor(hours / 24);
+    //     return `${days} days ago`;
+    // }
+
+    // document.addEventListener("DOMContentLoaded", function () {
+    //     document.querySelectorAll(".time-ago").forEach(function (element) {
+    //         const time = element.getAttribute("data-time");
+    //         element.innerText = timeAgo(time);
+    //     });
+    // });
+
+    //ImgUpload
+    const ImgUpload = document.getElementById('imageUpload')
+    if (ImgUpload) {
+        ImgUpload.addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('profilePicPreview').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+
+    // Tooltip
+    document.addEventListener('DOMContentLoaded', function () {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    }); 
+</script>
