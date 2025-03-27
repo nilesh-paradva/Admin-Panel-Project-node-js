@@ -73,6 +73,7 @@ Students will develop an Admin Panel where an admin can manage users and product
 2. Install dependencies:
    ```bash
    cd Admin-Panel-Project-node-js
+   npm install
 
 3. Run the file:
    ```bash
