@@ -224,7 +224,6 @@
 															<tr class="text-center">
 																<th><span>Product Image</span></th>
 																<th><span>Product Name</span></th>
-																<th><span>Description</span></th>
 																<th><span>Price</span></th>
 																<th><span>Original Price</span></th>
 																<th><span>Stock Quantity</span></th>
@@ -238,7 +237,6 @@
 																<tr class="text-center">
 																	<td><img src="<%= product.ProductImage ? product.ProductImage : 'uploads/productImage/Product.png' %>"  class="product-picture border border-1"  alt="<%= product.name %>"  style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;"></td>
 																	<td class="align-middle"><%= product.name %></td>
-																	<td class="align-middle product-description"><%- product.description %></td>
 																	<td class="align-middle"><%= product.price %> ₹</td>
 																	<td class="align-middle"><%= product.originalPrice ? product.originalPrice : 0 %></td>
 																	<td class="align-middle"><%= product.stockQuantity ? product.stockQuantity : 0 %></td>
